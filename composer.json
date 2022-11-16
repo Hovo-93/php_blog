@@ -1,0 +1,23 @@
+{
+  "name": "vendor_name/blog",
+  "description": "description",
+  "minimum-stability": "stable",
+  "license": "proprietary",
+  "authors": [
+    {
+      "name": "Hovo",
+      "email": "email@example.com"
+    }
+  ],
+  "require": {
+  },
+  "require-dev": {
+
+  },
+  "autoload": {
+    "psr-4": {
+      "app\\": "app",
+      "src\\": "vendor/src"
+    }
+  }
+}
