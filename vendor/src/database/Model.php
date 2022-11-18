@@ -11,6 +11,7 @@ class Model extends DBManager implements DBMethods
     private $values;
     private $fields;
     private $placholder;
+    private $from;
 
 
     public function dns($dbHost,$db_name)
@@ -35,10 +36,12 @@ class Model extends DBManager implements DBMethods
     {
         $this->fields = implode(',', array_keys($params));
         $this->values = array_values($params);
-        $this->placholder = implode(",", array_fill(0, count($params), "?"));
+        $this->placholder = implode(",", array_fill(0, count($params),"?"));
 
         $this->sql = "INSERT INTO {$table} ({$this->fields}) VALUES ({$this->placholder})";
-
+//        echo $this->sql;
+//        var_dump($this->prepare());
+//        die();
         return $this->prepare();
     }
 
@@ -74,15 +77,22 @@ class Model extends DBManager implements DBMethods
     {
         if(!empty($this->values)){
             $result = $this->prepare();
+
         }else{
             $result = $this->query();
         }
-        return $result->fetch(\PDO::FETCH_ASSOC);
+        return $result->fetchAll(\PDO::FETCH_ASSOC);
     }
 
     public function first()
     {
-        //todo
+        if(!empty($this->values)){
+            $result = $this->prepare();
+
+        }else{
+            $result = $this->query();
+        }
+        return $result->fetch(\PDO::FETCH_ASSOC);
     }
 
     public function select(...$params)
@@ -93,19 +103,45 @@ class Model extends DBManager implements DBMethods
             $this->placholder = implode(",", $params);
         }
         // func_get_args(); get function arguments by array type
-        $this->sql = "Select {$this->placholder} ";
+        $this->sql = "SELECT {$this->placholder} ";
+
 
         return $this;
     }
 
-    public function update($params)
+    public function update($params,$table,$where=[])
     {
-        // TODO: Implement update() method.
+
+//        $sql = "UPDATE users SET name=?, surname=?, sex=? WHERE id=?";
+//        $stmt= $pdo->prepare($sql);
+//        $stmt->execute([$name, $surname, $sex, $id]);
+        $this->fields =  array_keys($params);
+        $this->placholder = implode(",", array_fill(0, count($params), "?"));
+        $finalFields = [];
+        for ($i=0; $i<count($this->fields);$i++){
+                   array_push($finalFields,$this->fields[$i]."=". $this->placholder[0]);
+        }
+//        var_dump($finalFields);
+        $this->values = array_values($params);
+        $eachFields = implode(',',array_values($finalFields));//name=?,email=?,password=?,age=?
+        $this->sql ="UPDATE {$table} SET {$eachFields}";
+
+//        echo $this->sql;
+//        var_dump($this->prepare());
+//        die();
+//        if(!empty($where)){
+//
+//            foreach ($where as $k=>$item){
+//                $this->where($k,$item);
+//            }
+//        }
+//        $this->prepare();
+//        return $this;
     }
 
     public function delete($params)
     {
-        // TODO: Implement delete() method.
+//        $sql = "DELETE FROM users WHERE id=?";
     }
 
     public function where($field, $value, $condition = "=")
@@ -124,26 +160,34 @@ class Model extends DBManager implements DBMethods
 
     public function orWhere($field, $value, $condition = "=")
     {
-        // TODO: Implement orWhere() method.
+        $this->sql .= " or $field $condition ?";
+        $this->values[] = $value;
+        return $this;
     }
 
     public function orderBy($field, $sort = "ASC")
     {
-        // TODO: Implement orderBy() method.
+
+        $this->sql.=" order by $field $sort";
+//        $this->values[] =$value;
+        return $this;
     }
 
     public function groupBy($field)
     {
-        // TODO: Implement groupBy() method.
+        $this->sql .=" group by $field";
+        return $this;
     }
 
     public function limit($limit)
     {
-        // TODO: Implement limit() method.
+        $this->sql .=" limit $limit";
+        return $this;
     }
 
     public function like($field, $value, $wildcard = "both")
     {
         // TODO: Implement like() method.
     }
+
 }

@@ -8,8 +8,8 @@ abstract class DBManager
     protected $username;
     protected $password;
     protected $db_name;
-//    protected \PDO $connection;
-    protected $connection;
+    protected \PDO $connection;
+//    protected $connection;
     protected $dsn;
     protected $sql;
     protected $table;
