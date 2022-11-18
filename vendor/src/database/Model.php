@@ -39,9 +39,6 @@ class Model extends DBManager implements DBMethods
         $this->placholder = implode(",", array_fill(0, count($params),"?"));
 
         $this->sql = "INSERT INTO {$table} ({$this->fields}) VALUES ({$this->placholder})";
-//        echo $this->sql;
-//        var_dump($this->prepare());
-//        die();
         return $this->prepare();
     }
 
@@ -111,37 +108,41 @@ class Model extends DBManager implements DBMethods
 
     public function update($params,$table,$where=[])
     {
-
-//        $sql = "UPDATE users SET name=?, surname=?, sex=? WHERE id=?";
-//        $stmt= $pdo->prepare($sql);
-//        $stmt->execute([$name, $surname, $sex, $id]);
+        $update_sql = '';
         $this->fields =  array_keys($params);
         $this->placholder = implode(",", array_fill(0, count($params), "?"));
         $finalFields = [];
-        for ($i=0; $i<count($this->fields);$i++){
-                   array_push($finalFields,$this->fields[$i]."=". $this->placholder[0]);
+        for ($i = 0; $i < count($this->fields); $i++){
+            array_push($finalFields,$this->fields[$i]. "=" . $this->placholder[0]);
         }
-//        var_dump($finalFields);
-        $this->values = array_values($params);
-        $eachFields = implode(',',array_values($finalFields));//name=?,email=?,password=?,age=?
-        $this->sql ="UPDATE {$table} SET {$eachFields}";
+        $this->values = array_merge(array_values($params), $this->values);
+        $eachFields = implode(',',array_values($finalFields)); //name=?,email=?,password=?,age=?
+        $update_sql = "UPDATE {$table} SET {$eachFields}";
 
 //        echo $this->sql;
 //        var_dump($this->prepare());
 //        die();
 //        if(!empty($where)){
+//            $i = 0;
+//            foreach ($where as $k => $item){
+//                if($i === 0){
+//                    $this->sql .= " where $k = ? ";
+//                }else{
+//                    $this->sql .= " and $k = ? ";
+//                }
 //
-//            foreach ($where as $k=>$item){
-//                $this->where($k,$item);
+//                $this->values[] = $item;
+//                $i++;
 //            }
+//
 //        }
-//        $this->prepare();
-//        return $this;
+        $this->sql = $update_sql . $this->sql;
+        return $this->prepare();
     }
 
     public function delete($params)
     {
-//        $sql = "DELETE FROM users WHERE id=?";
+//        $sql = "DELETE FROM users WHERE id = ?";
     }
 
     public function where($field, $value, $condition = "=")

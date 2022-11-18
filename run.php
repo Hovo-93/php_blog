@@ -5,24 +5,22 @@ use src\database\Model;
 require_once "./vendor/autoload.php";
 
 
-//$db = new Model('127.0.0.1','blog','Test1234*','test_pdo'); Has
-$db = new Model('127.0.0.1:3307','root','','test_pdo');
+$db = new Model('127.0.0.1','blog','Test1234*','news'); //Has
+//$db = new Model('127.0.0.1:3307','root','','test_pdo');
 
-$name = 'murdfk';
-$email = 'maasdrterk@l.ru';
-$password = 'kar@mail';
-$age = 66;
 $params = [
-    'name' => $name,
-    'email'=> $email,
-    'password'=> $password,
-    'age' => $age,
+    'name' => 'murdfkfff',
+    'email'=> 'maasdrterk@l.ru',
+    'password'=> 'kar@mail',
+    'age' => 56,
 
 ];
 //todo like this way
 //User::insert($params);
 
-$db->update($params,"users",['id'=>98]);
+$db->where('id', 15)->andWhere('age', 66)->update($params,"users");
+
+//$db->where()->delete();
 
 //$db->insert($params, "users");
 //$users = $db->select("name",'age','id')
