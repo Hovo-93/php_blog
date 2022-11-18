@@ -1,6 +1,12 @@
 <?php
 namespace app\controllers;
-class AuthController
-{
 
+use src\routing\Controller;
+
+class AuthController extends Controller
+{
+    public function login()
+    {
+
+    }
 }
