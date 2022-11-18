@@ -17,7 +17,7 @@ interface DBMethods
 
     public function select(...$params);
 
-    public function update($params);
+    public function update($params,$table,$where=[]);
 
     public function delete($params);
 
