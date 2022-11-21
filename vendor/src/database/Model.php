@@ -106,9 +106,9 @@ class Model extends DBManager implements DBMethods
         return $this;
     }
 
-    public function update($params,$table,$where=[])
+    public function update($params,$table)
     {
-        $update_sql = '';
+//        $update_sql = '';
         $this->fields =  array_keys($params);
         $this->placholder = implode(",", array_fill(0, count($params), "?"));
         $finalFields = [];
@@ -116,33 +116,24 @@ class Model extends DBManager implements DBMethods
             array_push($finalFields,$this->fields[$i]. "=" . $this->placholder[0]);
         }
         $this->values = array_merge(array_values($params), $this->values);
-        $eachFields = implode(',',array_values($finalFields)); //name=?,email=?,password=?,age=?
+        $eachFields = implode(',',array_values($finalFields));
         $update_sql = "UPDATE {$table} SET {$eachFields}";
 
-//        echo $this->sql;
-//        var_dump($this->prepare());
-//        die();
-//        if(!empty($where)){
-//            $i = 0;
-//            foreach ($where as $k => $item){
-//                if($i === 0){
-//                    $this->sql .= " where $k = ? ";
-//                }else{
-//                    $this->sql .= " and $k = ? ";
-//                }
-//
-//                $this->values[] = $item;
-//                $i++;
-//            }
-//
-//        }
+
         $this->sql = $update_sql . $this->sql;
         return $this->prepare();
     }
 
     public function delete($params)
     {
+
+        $update_sql = "DELETE ";
+        $this->sql = $update_sql . $this->sql;
+        die($this->sql);
+        return $this;
+        //todo
 //        $sql = "DELETE FROM users WHERE id = ?";
+
     }
 
     public function where($field, $value, $condition = "=")
@@ -186,9 +177,10 @@ class Model extends DBManager implements DBMethods
         return $this;
     }
 
-    public function like($field, $value, $wildcard = "both")
+    public function like($field, $pattern = "both")
     {
-        // TODO: Implement like() method.
+        return $this->where($field,$pattern,' LIKE ');
+
     }
 
 }
