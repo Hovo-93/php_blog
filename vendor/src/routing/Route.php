@@ -10,7 +10,7 @@ class Route
     protected static $method;
     protected static $params;
     protected static $uri;
-
+    protected static $routes = [];
 
 
     public function __construct(Request $request, Response $response)
@@ -21,8 +21,7 @@ class Route
         self::$uri = $this->request->getUri();
 
     }
-
-    protected static $routes = [];
+    
 
     public static function get(string $uri, callable $callable)
     {
@@ -36,8 +35,8 @@ class Route
     }
 
 
-    public static function run()
+    public function run()
     {
-
+        print_r(self::$routes);
     }
 }

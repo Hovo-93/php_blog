@@ -124,13 +124,12 @@ class Model extends DBManager implements DBMethods
         return $this->prepare();
     }
 
-    public function delete($params)
+    public function delete()
     {
 
         $update_sql = "DELETE ";
         $this->sql = $update_sql . $this->sql;
-        die($this->sql);
-        return $this;
+        return $this->prepare();
         //todo
 //        $sql = "DELETE FROM users WHERE id = ?";
 
@@ -177,9 +176,9 @@ class Model extends DBManager implements DBMethods
         return $this;
     }
 
-    public function like($field, $pattern = "both")
+    public function like($field, $pattern)
     {
-        return $this->where($field,$pattern,' LIKE ');
+        return $this->where($field, $pattern,' LIKE ');
 
     }
 

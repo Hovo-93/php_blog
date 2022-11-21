@@ -8,4 +8,4 @@ Route::get('/test', function (){
     echo 'hello test';
 });
 
-Route::post('/login', [AuthController::class, '']);
+Route::post('/login', [AuthController::class, 'login']);

@@ -19,7 +19,7 @@ interface DBMethods
 
     public function update($params,$table);
 
-    public function delete($params);
+    public function delete();
 
     public function where($field, $value, $condition = "=");
 
@@ -35,5 +35,5 @@ interface DBMethods
 
     public function offset($offset);
 
-    public function like($field, $pattern="both");
+    public function like($field, $pattern);
 }

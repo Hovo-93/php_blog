@@ -20,7 +20,7 @@ $params = [
 
 $db->where('id', 15)->andWhere('age', 66)->update($params,"users");
 
-//$db->where()->delete();
+$db->from("users")->where("id", 15)->delete();
 
 //$db->insert($params, "users");
 //$users = $db->select("name",'age','id')
