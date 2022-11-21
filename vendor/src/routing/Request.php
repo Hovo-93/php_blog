@@ -18,8 +18,10 @@ class Request
 
     public function getUri()
     {
-        //todo get clean request uri without ? symbols
-        return $_SERVER["REQUEST_URI"];
+        $uri =  $_SERVER["REQUEST_URI"];
+        $pos = strpos($uri,'?');
+        $clean = substr($uri,0,$pos);
+        return $clean;
     }
 
 }
