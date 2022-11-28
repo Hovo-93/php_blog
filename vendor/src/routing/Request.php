@@ -7,7 +7,7 @@ class Request
 
     public function getMethod()
     {
-        return $_SERVER['REQUEST_METHOD'];
+        return strtolower($_SERVER['REQUEST_METHOD']);
     }
 
     public function getParams()
@@ -19,8 +19,21 @@ class Request
     {
         $uri =  $_SERVER["REQUEST_URI"];
         $pos = strpos($uri,'?');
-        $clean = substr($uri,0,$pos);
-        return $clean;
+        if($pos){
+            return substr($uri,0, $pos);
+        }
+
+        return $uri;
+    }
+
+    public function all()
+    {
+        return $this->getParams();
+    }
+
+    public function input($key)
+    {
+        return $this->getParams()[$key]??null;
     }
 
 }

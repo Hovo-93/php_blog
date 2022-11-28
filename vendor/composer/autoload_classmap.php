@@ -9,6 +9,7 @@ return array(
     'Composer\\InstalledVersions' => $vendorDir . '/composer/InstalledVersions.php',
     'app\\controllers\\AuthController' => $baseDir . '/app/controllers/AuthController.php',
     'app\\models\\User' => $baseDir . '/app/models/User.php',
+    'src\\Application' => $vendorDir . '/src/Application.php',
     'src\\database\\DBConnectValidation' => $vendorDir . '/src/database/DBConnectValidation.php',
     'src\\database\\DBManager' => $vendorDir . '/src/database/DBManager.php',
     'src\\database\\DBMethods' => $vendorDir . '/src/database/DBMethods.php',

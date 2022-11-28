@@ -6,6 +6,10 @@ namespace Composer\Autoload;
 
 class ComposerStaticInit4b6dbd1526d580f9499f1b6c49cf0a96
 {
+    public static $files = array (
+        '07386fa94007bb90e8c0e85a44ca970b' => __DIR__ . '/..' . '/src/founding/helpers.php',
+    );
+
     public static $prefixLengthsPsr4 = array (
         's' => 
         array (
@@ -32,6 +36,7 @@ class ComposerStaticInit4b6dbd1526d580f9499f1b6c49cf0a96
         'Composer\\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php',
         'app\\controllers\\AuthController' => __DIR__ . '/../..' . '/app/controllers/AuthController.php',
         'app\\models\\User' => __DIR__ . '/../..' . '/app/models/User.php',
+        'src\\Application' => __DIR__ . '/..' . '/src/Application.php',
         'src\\database\\DBConnectValidation' => __DIR__ . '/..' . '/src/database/DBConnectValidation.php',
         'src\\database\\DBManager' => __DIR__ . '/..' . '/src/database/DBManager.php',
         'src\\database\\DBMethods' => __DIR__ . '/..' . '/src/database/DBMethods.php',

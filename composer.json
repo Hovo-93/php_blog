@@ -18,6 +18,7 @@
     "psr-4": {
       "app\\": "app",
       "src\\": "vendor/src"
-    }
+    },
+    "files": ["vendor/src/founding/helpers.php"]
   }
 }
