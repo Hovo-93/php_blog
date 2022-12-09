@@ -10,9 +10,7 @@
     }
   ],
   "require": {
-  },
-  "require-dev": {
-
+    "symfony/console": "^5.4"
   },
   "autoload": {
     "psr-4": {
