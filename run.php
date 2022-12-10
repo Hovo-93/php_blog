@@ -31,8 +31,7 @@ $db->from("users")->where("id", 15)->delete();
 //    ->limit('10')
 //    ->get();
 
-//print_r($users);
+print_r($users);
 
 //$db->insertDB('INSERT INTO users (name, email, password) VALUES (:name, :email, :password)',$params);
-//$res =$db->query("SELECT * FROM users");
 

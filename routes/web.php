@@ -16,3 +16,8 @@ Route::post('/login', [AuthController::class, 'login']);
 
 
 Route::get('/login', [AuthController::class, 'signIn']);
+
+Route::get('/data',[AuthController::class,'checkData']);
+
+Route::get('/registration',[AuthController::class,'signUp']);
+Route::post('/registration',[AuthController::class,'register']);

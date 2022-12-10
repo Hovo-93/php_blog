@@ -2,6 +2,8 @@
 
 namespace src\routing;
 
+use app\models\User;
+
 class Controller
 {
     public static function view($view, ...$params)

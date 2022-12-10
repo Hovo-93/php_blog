@@ -13,6 +13,10 @@ class Model extends DBManager implements DBMethods
     private $placholder;
     private $from;
 
+    public function __construct()
+    {
+        parent::__construct('127.0.0.1:3307','root','','test_pdo');
+    }
 
     public function dns($dbHost,$db_name)
     {
@@ -180,6 +184,19 @@ class Model extends DBManager implements DBMethods
     {
         return $this->where($field, $pattern,' LIKE ');
 
+    }
+
+    public   function getClassName() {
+        $path = get_class($this);
+        $className = explode('\\',$path);
+        $tableName =$className[2];
+        $endS = substr($tableName,-1);
+        if ($endS=='s'){
+            return strtolower($tableName);
+        }
+        else {
+            return strtolower($tableName . 's');
+        }
     }
 
 }

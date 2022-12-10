@@ -2,6 +2,7 @@
 
 namespace src;
 
+use app\models\User;
 use src\routing\Request;
 use src\routing\Response;
 use src\routing\Route;
