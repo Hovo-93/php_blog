@@ -7,6 +7,7 @@ use src\database\DBMethods;
 class Model extends DBManager implements DBMethods
 {
 //    use DBConnectValidation;
+//    use Singletone;
 
     private $values;
     private $fields;
@@ -18,23 +19,10 @@ class Model extends DBManager implements DBMethods
         parent::__construct('127.0.0.1:3307','root','','test_pdo');
     }
 
-    public function dns($dbHost,$db_name)
+    public function getConnection()
     {
-        $this->dsn = "mysql:host=$dbHost;dbname=$db_name;";
+        return $this->connection;
     }
-
-    public function connect()
-    {
-        try
-        {
-            $this->connection = new \PDO($this->dsn, $this->username, $this->password);
-            return $this;
-        }
-        catch (\PDOException $PDO) {
-            return $PDO->getMessage();
-        }
-    }
-    
 
     public function insert($params, $table)
     {

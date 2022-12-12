@@ -44,7 +44,7 @@ class AuthController extends Controller
 
                 ];
                 if ($password === $re_password){
-                        print_r($this->user->insert($params,'users'));
+                        print_r($this->user->insert($params,$this->user->getClassName()));
                         header('Location: /login');
                 }
                 else{
