@@ -4,6 +4,7 @@
 
 require __DIR__.'/vendor/autoload.php';
 
+use src\commands\command\MakeControllerCommand;
 use Symfony\Component\Console\Application;
 use src\commands\command\ServeCommand;
 use src\commands\command\MakeModelCommand;
@@ -12,5 +13,6 @@ $application = new Application();
 
 $application->add(new ServeCommand());
 $application->add(new MakeModelCommand());
+$application->add(new MakeControllerCommand());
 
 $application->run();

@@ -10,6 +10,8 @@ class MakeModelCommandExecute
     {
         $root_dir = dirname(__DIR__, '4');
         $path = "$root_dir/app/models/$name.php";
+        echo $path;
+        die();
         if(!file_exists($path))
         {
             $str = <<<END
